@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crypto Tracker</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id = "stocks" class="container"></div>
+    <canvas id="chart" width="400" height="400"></canvas>
+    <button style="position: fixed; top: 10px; right: 10px; background-color: #4CAF50;
+    color: white; padding: 10px 20px;
+    font-size: 18px;
+    border-radius: 5px;" onClick="window.location.reload();">Home</button>
+
+
+    <script>
+        const container = document.querySelector('.container');
+        const chartCanvas = document.getElementById('chart');
+        const coins = ['bitcoin', 'tether', 'ethereum', 'litecoin', 'cardano', 'dogecoin'];
+
+        function fetchCoinData(coin) {
+            document.getElementById("stocks").hidden=true;
+            return fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=7`)
+                .then(response => response.json())
+                .then(data => {
+                    const chartData = {
+                        labels: data.prices.map(price => new Date(price[0]).toLocaleDateString()),
+                        datasets: [
+                            {
+                                label: `${coin.toUpperCase()} Price`,
+                                data: data.prices.map(price => price[1]),
+                                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                                borderColor: 'rgba(255, 99, 132, 1)',
+                                borderWidth: 1,
+                            },
+                        ],
+                    };
+
+                    return chartData;
+                })
+                .catch(error => console.error(`Error fetching ${coin} data: ${error}`));
+        }
+        
+
+
+        function updateChart(coin) {
+    fetchCoinData(coin).then(chartData => {
+        new Chart(chartCanvas, {
+            type: 'line',
+            data: chartData,
+            options: {
+                responsive: true,
+                maintainAspectRatio: false,
+            },
+        });
+        
+    });
+}
+
+        function renderCoinData() {
+            fetch('https://api.coingecko.com/api/v3/simple/price?ids=bitcoin%2Ctether%2Cethereum%2Clitecoin%2Ccardano%2Cdogecoin&vs_currencies=usd&include_24hr_change=true')
+                .then(response => response.json())
+                .then(data => {
+                    for (let coin of coins) {
+                        const coinData = data[coin];
+                        const price = coinData.usd;
+                        const change = coinData.usd_24h_change.toFixed(5);
+
+                        const coinDiv = document.createElement('div');
+                        coinDiv.classList.add('coin');
+                        coinDiv.classList.add(change < 0 ? 'falling' : 'rising');
+                        coinDiv.innerHTML = `
+                            <div class="coin-logo">
+                                <img src="images/${coin}.png">
+                            </div>
+                            <div class="coin-name">
+                                <h3>${coin}</h3>
+                                <span>/USD</span>
+                            </div>
+                            <div class="coin-price">
+                                <span class="price">$${price}</span>
+                                <span class="change">${change}%</span>
+                            </div>
+                        `;
+                        container.appendChild(coinDiv);
+
+                        coinDiv.addEventListener('click', () => updateChart(coin));
+                    }
+                })
+                .catch(error => console.error(`Error fetching coin data: ${error}`));
+        }
+       
+                
+
+
+
+
+
+
+        renderCoinData();
+    </script>
+    
+</body>
+</html>
