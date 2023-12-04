@@ -10,3 +10,12 @@ body {
     -o-background-size: cover;
     background-size: cover;
 }
+
+#body {
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 5%;
+    text-align: left;
+    font-size: 18px;
+    color: #ffffff;
+}
