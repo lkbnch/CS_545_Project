@@ -16,6 +16,9 @@
     <a href="learningSpace.html" class="button" style="position: fixed; top: 85px; right: 10px; background-color: #4CAF50;
     color: white; padding: 10px 20px; font-size: 18px; border-radius: 5px;" id="learn">Learning Space</a>
 
+    <a href="index.html" class="button" style="position: fixed; top: 160px; right: 10px; background-color: #4CAF50; 
+    color: white; padding: 10px 20px; font-size: 18px; border-radius: 5px;" id="logout">Logout</a>
+
 
 
     <script>
@@ -26,6 +29,7 @@
         function fetchCoinData(coin) {
             document.getElementById("stocks").hidden=true;
             document.getElementById("learn").hidden=true;
+            document.getElementById("logout").hidden=true;
             return fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=7`)
                 .then(response => response.json())
                 .then(data => {
@@ -100,6 +104,5 @@
 
         renderCoinData();
     </script>
-    
 </body>
 </html>
