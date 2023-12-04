@@ -13,6 +13,10 @@
     font-size: 18px;
     border-radius: 5px;" onClick="window.location.reload();">Home</button>
 
+    <a href="learningSpace.html" class="button" style="position: fixed; top: 85px; right: 10px; background-color: #4CAF50;
+    color: white; padding: 10px 20px; font-size: 18px; border-radius: 5px;" id="learn">Learning Space</a>
+
+
 
     <script>
         const container = document.querySelector('.container');
@@ -21,6 +25,7 @@
 
         function fetchCoinData(coin) {
             document.getElementById("stocks").hidden=true;
+            document.getElementById("learn").hidden=true;
             return fetch(`https://api.coingecko.com/api/v3/coins/${coin}/market_chart?vs_currency=usd&days=7`)
                 .then(response => response.json())
                 .then(data => {
@@ -91,12 +96,7 @@
                 .catch(error => console.error(`Error fetching coin data: ${error}`));
         }
        
-                
-
-
-
-
-
+            
 
         renderCoinData();
     </script>

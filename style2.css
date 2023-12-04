@@ -1,0 +1,21 @@
+body {
+    height: 100vh;
+    display: flex;
+    /* align-items: center;
+    justify-content: center; */
+    background: url(images/BTC.jpg) no-repeat center center fixed;
+    background-size: cover;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#body {
+    width: 50%;
+    margin-left: 50%;
+    margin-top: 5%;
+    text-align: left;
+    font-size: 18px;
+    color: #ffffff;
+}

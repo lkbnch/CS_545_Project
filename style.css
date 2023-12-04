@@ -11,7 +11,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    background: url(images/background.jpg) no-repeat center center fixed;
+    background: url(images/background2.jpg) no-repeat center center fixed;
     background-size: cover;
     -webkit-background-size: cover;
     -moz-background-size: cover;
@@ -121,4 +121,3 @@ body {
   #reload-button:hover {
     background-color: #3e8e41;
   }
-  
