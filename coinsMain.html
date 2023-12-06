@@ -4,8 +4,31 @@
     <title>Crypto Compass</title>
     <link rel="stylesheet" href="style.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        #logo {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            display: flex;
+            align-items: center;
+            color: rgb(175, 165, 165);
+            font-weight: bold;
+            font-size: 20px;
+            font-family: Verdana;
+        }
+
+        #logo img {
+            width: 30px;
+            height: 30px;
+            margin-right: 10px;
+        }
+    </style>
 </head>
 <body>
+    <div id="logo">
+        <img src="images/logo.png" alt="CryptoCompass Logo">
+        CryptoCompass
+    </div>
     <div id = "stocks" class="container"></div>
     <canvas id="chart" width="400" height="400"></canvas>
     <button style="position: fixed; top: 10px; right: 10px; background-color: #4CAF50;
